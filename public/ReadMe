@@ -1,0 +1,27 @@
+WHAT THE PROJECT DOES:
+This project is expected to allow the user to access news areticles from YAHOO.COM
+without having to actually log on yahoo. The app should you a method of scraping to remove 
+those articles and place them on the site we have assigned for this project. The app 
+should also allow the user to save and make notes on the articles they decide to save.
+
+WHY IS THIS PROJECT USEFUL:
+This project is useful because it allows the user to access content without actually
+go to the site to get the content. I could scrape multiple sites for information and 
+populate one site with multiple sites worth of information. Also, the user can save 
+articles to read at a later time.
+
+HOW CAN USERS GET STARTED WITH THIS PROJECT:
+Users can get started with this project by going to the heroku website of the app
+and pressing the srape button. Once they do that they will will be shown articles
+to be read.
+
+WHERE CAN USERS GET HELP WITH THIS PROJECT:
+Users can get help with this application by reading this "ReadMe" document. 
+They could also reach me on GITHUB as well.
+
+WHO MAINTAINS AND CONTRIBUTES TO THIS PROJECT:
+I am the only person who maintains and contributes towards this application.
+
+The Links to this project are:
+[Heroku](https://arcane-inlet-76365.herokuapp.com/)
+[Github](https://github.com/LevarB100/Stolen-Bars-News)
