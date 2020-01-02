@@ -1,74 +1,46 @@
-const express = require("express");
-const mongoose = require("mongoose");
+var express = require("express");
+var logger = require("morgan");
+var mongoose = require("mongoose");
 
-const axios = require("axios");
-const cheerio = require("cheerio");
+// Require axios and cheerio. This makes the scraping possible
+var axios = require("axios");
+var cheerio = require("cheerio");
 
-const app = express();
+var PORT = process.env.PORT || 3000;
 
-const databaseUrl = "scraper";
-const collections = ["scrapedData"];
+// Require all models
+var db = require("./models");
 
-const db = mongoose(databaseUrl, collections);
-db.on("error", function(error) {
-  console.log("Database Error:", error);
-});
+// Initialize Express
+var app = express();
 
-app.get("/", function(req, res) {
-  res.send("Hello");
-});
+// Database configuration
+var databaseUrl = "scraper";
+var collections = ["scrapedData"];
 
-app.get("/all", function(req, res) {
-  db.scrapedData.find({}, function(error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-      res.json(found);
-    }
-  });
-});
+// Configure middleware
 
-// Scrape data from one site and place it into the mongodb db
-app.get("/scrape", function(req, res) {
-  // Make a request via axios for the news section of `yahoo`
-  axios.get("www.yahoo.com").then(function(response) {
-    // Load the html body from axios into cheerio
-    const $ = cheerio.load(response.data);
+// Use morgan logger for logging requests
+app.use(logger("dev"));
 
-    const articles = [];
-    // For each element with a "title" class
-    $(".stretchedbox").each(function(i, element) {
-      // Save the text and href of each link enclosed in the current element
-      const title = $(element)
-        .parent("a")
-        .text();
-      const link = $(element)
-        .parent("a")
-        .attr("href");
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-      // If this found element had both a title and a link
-      if (title && link) {
-        // Insert the data in the scrapedData db
-        articles.push({
-          title: title,
-          link: link
-        });
-      }
-    });
+// Make public a static folder
+app.use(express.static("public"));
 
-    db.scrapedData.insert(articles, function(err) {
-      if (err) return res.json({ err: err.message });
+//Require our routes
+require("./routes/api-routes.js")(app);
 
-      // Send a "Scrape Complete" message to the browser
-      res.send("Scrape Complete");
-    });
-  });
-});
+// Connect to the Mongo DB
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news-scraper";
+mongoose.connect(MONGODB_URI);
 
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
+// old version
+// mongoose.connect("mongodb://localhost/populatedb", { useNewUrlParser: true });
+
+// Start the server
+app.listen(PORT, function() {
+  console.log("App running on port " + PORT + "!");
 });
