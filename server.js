@@ -34,8 +34,19 @@ app.use(express.static("public"));
 require("./routes/api-routes.js")(app);
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news-scraper";
-mongoose.connect(MONGODB_URI);
+var MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/news-scraper";
+mongoose
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(function() {
+    console.log("Connected to DB");
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 
 // old version
 // mongoose.connect("mongodb://localhost/populatedb", { useNewUrlParser: true });

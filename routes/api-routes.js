@@ -14,13 +14,13 @@ module.exports = function(app) {
   // A GET route for scraping the Reuters website
   app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with axios
-    axios.get("www.yahoo").then(function(response) {
+    axios.get("http://www.yahoo.com").then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
 
       const resultsArray = [];
       // Now, we grab the parent selector, and do the following:
-      $(".stretchedbox").each(function(i, element) {
+      $(".StretchedBox").each(function(i, element) {
         // Save an empty result object
         var result = {};
         // Add the headline, href, summary of every link, and save them as properties of the result object
@@ -39,13 +39,14 @@ module.exports = function(app) {
         resultsArray.push(result);
         // console.log(resultsArray);
       });
-
+      console.log(resultsArray);
+      console.log(db.Articles);
       // Create a new Article using the `result` object built from scraping
       db.Articles.insertMany(resultsArray, { ordered: false })
         .then(function(dbArticles) {
           // View the added result in the console
           console.log(dbArticles);
-          // res.send(dbArticles);
+          res.send(dbArticles);
         })
         .catch(function(err) {
           // If an error occurred, log it

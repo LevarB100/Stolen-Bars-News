@@ -18,10 +18,10 @@ var ArticlesSchema = new Schema({
     required: true
   },
   // `summary` is required and of type String
-  summary: {
-    type: String,
-    required: true
-  },
+  // summary: {
+  //   type: String,
+  //   required: true
+  // },
   //'saved is of type Boolean and is defaulted to false
   saved: {
     type: Boolean,
