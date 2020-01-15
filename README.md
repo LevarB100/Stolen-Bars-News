@@ -19,23 +19,30 @@ In this project I was Keen to use;
 
 The reason for tis project was to gain exprerince scrapping websites for information.
 
-Try it out:
-Installing
+### Try it out:
+
+### Installing
+
 To run the app locally, you will first need to git clone the repository to your local machine.
 
-HTTPS: $ git clone git@github.com:LevarB100/FriendFinder.git
+HTTPS: $ git@github.com:LevarB100/Stolen-Bars-News.git
 
-SSH:$ git clone git@github.com:LevarB100/FriendFinder.git
+SSH:$ git@github.com:LevarB100/Stolen-Bars-News.git
 
 Once cloned, cd into the repository and install the necessary dependencies by running: $ npm install
 
 You can then start the app locally by running: $ node server.js
 
-Built With
-Express.js - Node.js framework jQuery - Front-end framework Node.js - JavaScript runtime npm - Dependency management Bootstrap - CSS framework
+### Built With
 
-Authors
+-Express.js 
+-jQuery
+-JavaScript
+-Axios
+-Bootstrap 
+
+### Authors
 See contribution history here
 
-Future Updates
-At the moment, the app will check your survey results against a seed file with results from various fake "friends." In the future, I would like to add in a database in order to have users match against one another instead of the seed file.
+### Future Updates
+At the moment the app only scrapes yahoo.com. In the future I would like to make were the application will scrape multiple websites and to be able to organize the information received so I can offer it to the user by subject matter.
