@@ -134,7 +134,7 @@ $(document).ready(function() {
   });
 
   // When the 'Save Note' button is clicked in the modal
-  $(docum).on("click", "#save-note-btn", function(data) {
+  $(document).on("click", "#save-note-btn", function(data) {
     console.log("Save note button clicked");
     $.ajax({
       type: "POST",
