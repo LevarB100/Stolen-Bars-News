@@ -151,7 +151,7 @@ $(document).ready(function() {
     console.log("Delete note button clicked");
     // var thisID = $(this).attr("article-id");
     $.ajax({
-      type: "POST",
+      te: "POST",
       url: "/deleteNote/" + articleID
     });
     $("#posted-notes").val("");
